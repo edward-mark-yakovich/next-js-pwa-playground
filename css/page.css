@@ -1,0 +1,51 @@
+.page {
+	position: relative;
+	width: 100%;
+	max-width: 840px;
+	margin: 0 auto;
+	padding: var(--spacing-small);
+}
+
+.page__content > .grid {
+	justify-content: space-between;
+}
+
+.page__heading {
+	margin-bottom: var(--spacing-large);
+}
+
+.page__heading h1 {
+	font-size: var(--font-large);
+	font-weight: 100;
+}
+
+.page__copy > * {
+	margin-bottom: var(--spacing-small);
+}
+
+.page__copy h2 {
+	margin-bottom: var(--spacing-small);
+}
+
+.page__section {
+	margin-bottom: var(--spacing-large);
+}
+
+.page__section-notes {
+	max-width: 300px;
+	font-size: var(--font-small);
+	margin: 0 auto;
+}
+
+.page__section-notes li {
+	margin: var(--spacing-small) 0;
+}
+
+/*********************
+page level
+*********************/
+
+.page--home,
+.page--auth {
+	margin-top: var(--spacing-xlarge);
+}
