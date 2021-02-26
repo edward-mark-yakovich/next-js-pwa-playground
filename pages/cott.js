@@ -61,7 +61,7 @@ const Cott = ({posts}) => {
 }
 
 export async function getStaticProps(context) {
-  const posts = await request('http://edyakovich.com/test/headless-wordpress/wp-json/wp/v2/posts?_embed') || [];
+  const posts = await request('http://chinonthetank.com/wp-json/wp/v2/posts?_embed&per_page=30') || [];
 
   return {
     props: {posts},

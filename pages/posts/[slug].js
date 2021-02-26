@@ -59,7 +59,7 @@ const CottPost = ({data}) => {
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const data = await request(`http://edyakovich.com/test/headless-wordpress/wp-json/wp/v2/posts?_embed&slug=${params.slug}`, preview, previewData);
+  const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts?_embed&slug=${params.slug}`, preview, previewData);
 
   return {
     props: {data},
@@ -68,7 +68,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await request('http://edyakovich.com/test/headless-wordpress/wp-json/wp/v2/posts');
+  const allPosts = await request('http://chinonthetank.com/wp-json/wp/v2/posts?_embed&per_page=30');
   const pathSlugs = allPosts.map(node => `/posts/${node.slug}`) || [];
 
   return {

@@ -7,8 +7,15 @@
 }
 
 .post-listing__item {
-  max-width: 25%;
-  flex-basis: 25%;
+  max-width: 50%;
+  flex-basis: 50%;
+}
+
+@media only screen and (min-width: 600px) {
+  .post-listing__item {
+    max-width: 25%;
+    flex-basis: 25%;
+  }
 }
 
 .post-listing__item > a {

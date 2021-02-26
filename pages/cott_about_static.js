@@ -24,9 +24,14 @@ const CottStatic = ({data}) => {
         <div className="page__copy">
 
           <div className="page__section">
-            <h2>{acf?.metaTitle || ''}</h2>
+            <h2 className="post-page__content-heading">{pageContent?.title?.rendered || ''}</h2>
 
-            <p>{acf?.metaDescription || ''}</p>
+            <div
+              className="post-page__content-body"
+              dangerouslySetInnerHTML={{
+                  __html: pageContent?.content?.rendered || ''
+              }}
+            />
           </div>
 
         </div>
@@ -37,7 +42,7 @@ const CottStatic = ({data}) => {
 }
 
 export async function getStaticProps(context) {
-  const data = await request('http://edyakovich.com/test/headless-wordpress/wp-json/wp/v2/pages?slug=about')
+  const data = await request('http://chinonthetank.com/wp-json/wp/v2/pages?_embed&slug=about')
 
   return {
     props: {data},
