@@ -21,3 +21,26 @@
 .post-page__content {
   margin-top: var(--spacing-medium);
 }
+
+.post-page__content-body {
+  text-align: left;
+}
+
+.post-page__content-body ul {
+  margin: 0 0 30px 30px;
+}
+
+.post-page__content-body img,
+.post-page__content-body figure,
+.post-page__content-body video {
+	display: inline-block;
+	width: 100%;
+	height: auto;
+	margin: 20px 0;
+}
+
+.post-page__content-body figure iframe {
+	width: 100%;
+	min-height: 400px;
+	height: auto;
+}

@@ -8,7 +8,7 @@ const CottStatic = ({data}) => {
   const acf = pageContent?.acf || {};
 
   return (
-    <div className="page page--dashboard-server">
+    <div className="page page--cott-about">
       <Head>
         <title>Cott About</title>
         <link rel="icon" href="/favicon.ico" />

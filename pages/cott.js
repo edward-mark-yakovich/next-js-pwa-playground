@@ -1,12 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Nav from '../components/nav/nav';
 import {request} from '../components/utils/helpers';
 
-const Cott = ({posts}) => {
+const Cott = ({intro, categories}) => {
+  const router = useRouter();
+  const introContent = intro[0];
+
   return (
-    <div className="page page--dashboard">
+    <div className="page page--cott">
       <Head>
         <title>Cott</title>
         <link rel="icon" href="/favicon.ico" />
@@ -23,30 +27,40 @@ const Cott = ({posts}) => {
 
           <div className="page__section">
             <h2>Cott Posts</h2>
+            <button type="button" onClick={() => router.push('/posts/1')}>View Posts</button>
 
-            <div className="post-listing">
-              <ul className="grid">
-                {posts.map((post, index) => {
+            <div className="home-intro">
+              <div className="grid">
+                <div className="home-intro__img">
+                  <img src={introContent?._embedded?.['wp:featuredmedia']?.['0'].source_url || ''} />
+                </div>
+
+                <div className="home-intro__content">
+                  <h3
+                    className="home-intro__heading"
+                    dangerouslySetInnerHTML={{
+                        __html: introContent?.title?.rendered || ''
+                    }}
+                  />
+
+                  <div
+                    className="home-intro__copy"
+                    dangerouslySetInnerHTML={{
+                        __html: introContent?.excerpt?.rendered || ''
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="home-categories">
+              <h3>Categories</h3>
+
+              <ul>
+                {categories.map((category, index) => {
                   return (
-                    <li className="post-listing__item" key={index}>
-                      <Link href={`posts/${post.slug}`}>
-                        <a>
-                          <div className="post-listing__img">
-                            <img src={post?._embedded?.['wp:featuredmedia']?.['0'].source_url || ''} />
-                          </div>
-
-                          <div className="post-listing__name">{post.slug}</div>
-
-                          <div
-                            className="post-listing__excerpt"
-                            dangerouslySetInnerHTML={{
-                                __html: post?.excerpt?.rendered || ''
-                            }}
-                          />
-                        </a>
-                      </Link>
-                    </li>
-                  )
+                    <li key={index}>{category?.name || ''}</li>
+                  );
                 })}
               </ul>
             </div>
@@ -60,11 +74,15 @@ const Cott = ({posts}) => {
   )
 }
 
-export async function getStaticProps(context) {
-  const posts = await request('http://chinonthetank.com/wp-json/wp/v2/posts?_embed&per_page=30') || [];
+export async function getStaticProps({ params }) {
+  const intro = await request('http://chinonthetank.com/wp-json/wp/v2/pages?_embed&slug=about') || [];
+  const categories = await request('http://chinonthetank.com/wp-json/wp/v2/categories') || [];
 
   return {
-    props: {posts},
+    props: {
+      intro,
+      categories
+    },
     revalidate: 1
   };
 }

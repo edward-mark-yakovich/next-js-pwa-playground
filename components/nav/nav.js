@@ -44,6 +44,9 @@ const Nav = ({type}) => {
             <Link href='/cott'><a>Home</a></Link>
           </li>
           <li className="nav__list-item">
+            <Link href='/posts/1'><a>Posts</a></Link>
+          </li>
+          <li className="nav__list-item">
             <Link href='/cott_about_static'><a>About Static</a></Link>
           </li>
           <li className="nav__list-item">

@@ -1,9 +1,11 @@
 @import 'reset.css';
 @import 'page.css';
+@import 'components/nav.css';
 @import 'components/grid.css';
 @import 'components/data-list.css';
 @import 'components/post-listing.css';
 @import 'components/post-page.css';
+@import 'components/pagination.css';
 
 :root {
 	--spacing-small: 10px;
@@ -24,10 +26,6 @@
 	--animTime-long: 1s;
 }
 
-body {
-	background-color: #ebebeb;
-}
-
 button {
 	cursor: pointer;
 }
@@ -42,12 +40,24 @@ button {
 	text-align: center;
 }
 
-.nav {
-	position: relative;
-	padding: var(--spacing-large);
+/*********************
+quick fonts
+*********************/
+
+h1, h2, h3 {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.3em;
+  margin-bottom: 15px;
 }
 
-.nav__list-item {
-	display: inline-block;
-	margin: var(--spacing-small);
+p, li {
+  font-size: 12px;
+  line-height: 1.3em;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: disc;
+  margin-bottom: 10px;
 }
