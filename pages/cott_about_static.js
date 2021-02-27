@@ -45,7 +45,9 @@ export async function getStaticProps(context) {
   const data = await request('http://chinonthetank.com/wp-json/wp/v2/pages?_embed&slug=about')
 
   return {
-    props: {data},
+    props: {
+      data: data?.response || []
+    },
     revalidate: 1
   };
 }

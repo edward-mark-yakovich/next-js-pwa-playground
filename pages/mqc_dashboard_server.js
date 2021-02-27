@@ -105,9 +105,9 @@ export async function getServerSideProps(context) {
     ]);
 
     props = {
-      devicesHealth: dataDeviceHealthCall || {},
-      deviceTimeseries: dataDeviceTimeseriesCall?.Data || [],
-      gateways: dataGatewaysCall?.Gateways || []
+      devicesHealth: dataDeviceHealthCall?.response || {},
+      deviceTimeseries: dataDeviceTimeseriesCall?.response?.Data || [],
+      gateways: dataGatewaysCall?.response?.Gateways || []
     };
   }
 

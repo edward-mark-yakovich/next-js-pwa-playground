@@ -75,13 +75,13 @@ const Cott = ({intro, categories}) => {
 }
 
 export async function getStaticProps({ params }) {
-  const intro = await request('http://chinonthetank.com/wp-json/wp/v2/pages?_embed&slug=about') || [];
-  const categories = await request('http://chinonthetank.com/wp-json/wp/v2/categories') || [];
+  const intro = await request('http://chinonthetank.com/wp-json/wp/v2/pages?_embed&slug=about');
+  const categories = await request('http://chinonthetank.com/wp-json/wp/v2/categories');
 
   return {
     props: {
-      intro,
-      categories
+      intro: intro?.response || [],
+      categories: categories?.response || []
     },
     revalidate: 1
   };

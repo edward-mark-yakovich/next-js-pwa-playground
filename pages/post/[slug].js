@@ -59,17 +59,34 @@ const CottPost = ({data}) => {
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts?_embed&slug=${params.slug}`, preview, previewData);
+  const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts?_embed&slug=${params.slug}`);
 
   return {
-    props: {data},
+    props: {
+      data: data?.response || []
+    },
     revalidate: 1
   };
 }
 
 export async function getStaticPaths() {
-  const allPosts = await request('http://chinonthetank.com/wp-json/wp/v2/posts?_embed&per_page=30');
-  const pathSlugs = allPosts.map(node => `/post/${node.slug}`) || [];
+  const headerMetaItem = 'x-wp-total';
+  const postsAvailable = await request(`http://chinonthetank.com/wp-json/wp/v2/posts`, '', headerMetaItem);
+  const wpTotal = postsAvailable?.meta[headerMetaItem] || 0;
+  const callsNeeded = Math.ceil(wpTotal / 100);
+
+  let allPosts = [];
+  let flattenedPosts = [];
+
+  while (callsNeeded > allPosts.length) {
+    const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts?_embed&page=${allPosts.length + 1}&per_page=100`);
+    const posts = data?.response || [];
+
+    allPosts.push(posts);
+    flattenedPosts = [...flattenedPosts, ...posts];
+  }
+
+  const pathSlugs = flattenedPosts.map(node => `/post/${encodeURI(node.slug)}`) || [];
 
   return {
     paths: pathSlugs,

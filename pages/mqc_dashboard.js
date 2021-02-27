@@ -22,9 +22,9 @@ const Dashboard = () => {
       request('https://slam2.dev.machineq.net/v1/gateways')
     ]);
 
-    setDevicesHealth(devicesHealthCall || {});
-    setDeviceTimeseries(deviceTimeseriesCall?.Data || []);
-    setGateways(gatewaysCall?.Gateways || []);
+    setDevicesHealth(devicesHealthCall?.response || {});
+    setDeviceTimeseries(deviceTimeseriesCall?.response?.Data || []);
+    setGateways(gatewaysCall?.response?.Gateways || []);
   };
 
   useEffect(() => {

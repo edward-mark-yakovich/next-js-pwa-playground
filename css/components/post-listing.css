@@ -21,10 +21,10 @@
 
 .post-listing__item > a {
   display: inline-block;
-  width: calc(100% - 10px);
+  width: calc(100% - 20px);
   border-radius: 8px;
-  color: var(--color-grey-dark);
-  background-color: #ebebeb;
+  color: black;
+  background-color: var(--color-grey-ultra-light);
   text-decoration: none;
   margin: var(--spacing-small);
   padding: var(--spacing-small);
@@ -37,7 +37,7 @@
 .post-listing__item > a:hover,
 .post-listing__item > a:focus {
   color: #fff;
-  background-color: var(--color-grey-dark);
+  background-color: black;
   transform: scale(1.1);
 }
 
@@ -54,7 +54,7 @@
 }
 
 .post-listing__name {
-  font-weight: bold;
+  font-size: 10px;
   margin-top: var(--spacing-small);
   margin-bottom: var(--spacing-small);
 }

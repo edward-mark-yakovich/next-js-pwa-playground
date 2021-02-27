@@ -17,6 +17,7 @@
 	--font-medium: 12px;
 	--font-large: 22px;
 
+	--color-grey-ultra-light: #ebebeb;
 	--color-grey-light: #999;
 	--color-grey-medium: #666;
 	--color-grey-dark: #333;
@@ -58,6 +59,5 @@ p, li {
 }
 
 ul {
-  list-style: disc;
   margin-bottom: 10px;
 }

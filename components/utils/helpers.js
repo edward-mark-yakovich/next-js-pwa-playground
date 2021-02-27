@@ -19,8 +19,9 @@ export const isLoggedIn = () => {
 
 
 // ****** Request ******
-export const request = async (endpoint, authKey = '') => {
+export const request = async (endpoint, authKey = '', headerMeta = false) => {
   const needsAuth = endpoint.includes('machineq.net');
+  let fullResponse = null;
 
   if (needsAuth && authKey === '') {
     const cookie = document.cookie;
@@ -35,12 +36,18 @@ export const request = async (endpoint, authKey = '') => {
            }
          })
          .then(response => {
-            if (response.status == 200) {
-              return response.json();
-            } else {
-              console.warn('Get Request Error');
-            }
-          });
+           if (headerMeta) fullResponse = response;
+           return response.json();
+         })
+         .then(data => {
+            return {
+              ...(headerMeta && {meta: {
+                [headerMeta]: fullResponse.headers.get(headerMeta),
+              }}),
+              response: data
+            };
+          }
+        );
 };
 
 

@@ -72,11 +72,11 @@ const CottPage = ({data, currentPage}) => {
 
 export async function getStaticProps({ params, preview = false, previewData }) {
   const page = params.page || 1;
-  const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts?_embed&per_page=${globalPerPage}&page=${page}`, preview, previewData);
+  const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts?_embed&per_page=${globalPerPage}&page=${page}`);
 
   return {
     props: {
-      data,
+      data: data?.response || [],
       currentPage: page
     },
     revalidate: 1
@@ -85,9 +85,13 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 
 export async function getStaticPaths() {
   let pathsItems = [];
+  const headerMetaItem = 'x-wp-total';
+  const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts`, '', headerMetaItem);
+  const wpTotal = data?.meta[headerMetaItem] || 0;
+  const availablePages = Math.ceil(wpTotal / globalPerPage);
 
-  while (globalPerPage > pathsItems.length) {
-    pathsItems.push({ params: { perPage: globalPerPage, page: (pathsItems.length + 1).toString() } })
+  while (availablePages > pathsItems.length) {
+    pathsItems.push({ params: { page: (pathsItems.length + 1).toString() } })
   }
 
   return {

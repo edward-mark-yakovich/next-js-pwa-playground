@@ -27,6 +27,7 @@
 }
 
 .post-page__content-body ul {
+  list-style: disc;
   margin: 0 0 30px 30px;
 }
 

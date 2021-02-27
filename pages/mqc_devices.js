@@ -14,16 +14,16 @@ const Devices = () => {
   const handleLogout = () => router.push('/mqc_logout');
 
   const getDeviceData = async () => {
-    const devicesCall = await request('https://slam2.dev.machineq.net/v1/devices') || {};
-    const devices = devicesCall?.Devices || [];
+    const devicesCall = await request('https://slam2.dev.machineq.net/v1/devices');
+    const devices = devicesCall?.response?.Devices || [];
 
     setDevicesData(devices);
     appContext.setDevices(devices);
   };
 
   const getOpData = async () => {
-    const outputProfilesCall = await request('https://slam2.dev.machineq.net/v1/outputprofiles') || {};
-    const outputProfiles = outputProfilesCall?.OutputProfiles || [];
+    const outputProfilesCall = await request('https://slam2.dev.machineq.net/v1/outputprofiles');
+    const outputProfiles = outputProfilesCall?.response?.OutputProfiles || [];
 
     setOpData(outputProfiles);
   };
