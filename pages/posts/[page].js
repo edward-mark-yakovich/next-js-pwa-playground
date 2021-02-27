@@ -6,9 +6,11 @@ import Pagination from '../../components/pagination/pagination';
 import { useRouter } from 'next/router';
 import {request} from '../../components/utils/helpers';
 
+const globalPerPage = 20;
+
 const CottPage = ({data, currentPage}) => {
   const router = useRouter();
-  const posts = data;
+  const posts = data || [];
   const goToPostPage = (page) => {
     router.push(`${page}`);
   }
@@ -54,7 +56,7 @@ const CottPage = ({data, currentPage}) => {
               <Pagination
                 currentPage={currentPage}
                 handleChosenPage={(page) => goToPostPage(page)}
-                endOfPages={false}
+                endOfPages={globalPerPage > posts.length}
               />
 
             </div>
@@ -69,9 +71,8 @@ const CottPage = ({data, currentPage}) => {
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const perPage = params.perPage || 20;
   const page = params.page || 1;
-  const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts?_embed&per_page=${perPage}&page=${page}`, preview, previewData);
+  const data = await request(`http://chinonthetank.com/wp-json/wp/v2/posts?_embed&per_page=${globalPerPage}&page=${page}`, preview, previewData);
 
   return {
     props: {
@@ -83,11 +84,10 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 }
 
 export async function getStaticPaths() {
-  const perPage = '20';
   let pathsItems = [];
 
-  while (perPage > pathsItems.length) {
-    pathsItems.push({ params: { perPage: perPage, page: (pathsItems.length + 1).toString() } })
+  while (globalPerPage > pathsItems.length) {
+    pathsItems.push({ params: { perPage: globalPerPage, page: (pathsItems.length + 1).toString() } })
   }
 
   return {
