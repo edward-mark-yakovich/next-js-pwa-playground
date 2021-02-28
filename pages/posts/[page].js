@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Nav from '../../components/nav/nav';
+import { AppContext } from '../../components/AppContext';
 import Pagination from '../../components/pagination/pagination';
 import { useRouter } from 'next/router';
 import {request} from '../../components/utils/helpers';
@@ -9,11 +10,14 @@ import {request} from '../../components/utils/helpers';
 const globalPerPage = 20;
 
 const CottPage = ({data, currentPage}) => {
+  const appContext = useContext(AppContext);
   const router = useRouter();
   const posts = data || [];
   const goToPostPage = (page) => {
     router.push(`${page}`);
   }
+
+  appContext.setPostCurrentPage(currentPage);
 
   return (
     <div className="page page--cott-page">

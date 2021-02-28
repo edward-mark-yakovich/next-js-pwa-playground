@@ -1,8 +1,12 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { AppContext } from '../../components/AppContext';
 
 const Nav = ({type}) => {
+  const appContext = useContext(AppContext);
+  const appPostCurrentPage = appContext.postCurrentPage || 1;
+
   return (
     <nav className="nav">
 
@@ -44,7 +48,7 @@ const Nav = ({type}) => {
             <Link href='/cott'><a>Home</a></Link>
           </li>
           <li className="nav__list-item">
-            <Link href='/posts/1'><a>Posts</a></Link>
+            <Link href={`/posts/${appPostCurrentPage}`}><a>Posts</a></Link>
           </li>
           <li className="nav__list-item">
             <Link href='/cott_about_static'><a>About Static</a></Link>

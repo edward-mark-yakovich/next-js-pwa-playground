@@ -8,8 +8,18 @@ const Pagination = ({currentPage = 1, handleChosenPage, endOfPages = false}) => 
 
     dir === 'forward' ? ++updatedPage : --updatedPage;
 
-    handleChosenPage(updatedPage);
-    setPage(updatedPage);
+    sendOffPage(updatedPage);
+  }
+
+  const handlePaginationDirect = (event) => {
+    const val = event.target.value;
+
+    sendOffPage(parseInt(val) || 1);
+  }
+
+  const sendOffPage = (newPage) => {
+    handleChosenPage(newPage);
+    setPage(newPage);
 
     if (typeof window !== "undefined") window.scrollTo(0, 0);
   }
@@ -21,7 +31,10 @@ const Pagination = ({currentPage = 1, handleChosenPage, endOfPages = false}) => 
           Previous
         </button>
 
-        <div className="pagination__counter">{page}</div>
+        <div className="pagination__counter">
+          <label className="vh" htmlFor="pagination__input-ID-01">{page}</label>
+          <input value={page} onChange={(ev) => handlePaginationDirect(ev)} type="text" name="pagination__input-ID-01" id="pagination__input-ID-01" />
+        </div>
 
         <button disabled={endOfPages} className="pagination__btn" onClick={() => handlePagination('forward')}>
           Next

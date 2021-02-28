@@ -41,6 +41,19 @@ button {
 	text-align: center;
 }
 
+.vh {
+  position: absolute !important;
+  display: flex;
+  visibility: visible;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: 1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+}
+
 /*********************
 quick fonts
 *********************/

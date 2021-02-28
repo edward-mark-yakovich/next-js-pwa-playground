@@ -79,7 +79,7 @@ const Home = (test) => {
                 </li>
                 <li>
                   <b>Global state</b> -
-                    React Context?
+                    React Context or combine with useReducer.
                     If doing normal data fetching inline, probably throw the data in React Context, so then if user hits
                     the page again, it initially loads with the data from Context, and then also does the call again
                     to update page with new data.

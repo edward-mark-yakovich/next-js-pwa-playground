@@ -36,8 +36,13 @@ export const request = async (endpoint, authKey = '', headerMeta = false) => {
            }
          })
          .then(response => {
-           if (headerMeta) fullResponse = response;
-           return response.json();
+            if (headerMeta) fullResponse = response;
+
+            if (response.status == 200) {
+              return response.json();
+            } else {
+              console.warn('** Get Request Error');
+            }
          })
          .then(data => {
             return {

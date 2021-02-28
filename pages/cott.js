@@ -1,12 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Nav from '../components/nav/nav';
 import {request} from '../components/utils/helpers';
 
 const Cott = ({intro, categories}) => {
-  const router = useRouter();
   const introContent = intro[0];
 
   return (
@@ -27,7 +25,6 @@ const Cott = ({intro, categories}) => {
 
           <div className="page__section">
             <h2>Cott Posts</h2>
-            <button type="button" onClick={() => router.push('/posts/1')}>View Posts</button>
 
             <div className="home-intro">
               <div className="grid">
