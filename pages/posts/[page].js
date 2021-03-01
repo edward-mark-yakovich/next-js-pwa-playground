@@ -17,7 +17,7 @@ const CottPage = ({data, currentPage}) => {
     router.push(`${page}`);
   }
 
-  appContext.setPostCurrentPage(currentPage);
+  appContext.setPostCurrentPage(parseInt(currentPage));
 
   return (
     <div className="page page--cott-page">
