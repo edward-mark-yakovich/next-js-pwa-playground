@@ -43,3 +43,14 @@
   margin: 0;
   padding: 0;
 }
+
+.pagination__counter:hover {
+  border: 1px solid green;
+  color: white;
+  background-color: green;
+}
+
+.pagination__counter:hover input {
+  color: white;
+  background-color: green;
+}

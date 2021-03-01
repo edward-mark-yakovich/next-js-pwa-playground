@@ -1,11 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Nav from '../components/nav/nav';
+import { AppContext } from '../components/AppContext';
 import {request} from '../components/utils/helpers';
 
 const Cott = ({intro, categories}) => {
+  const appContext = useContext(AppContext);
   const introContent = intro[0];
+  const updateCurrentPostPage = () => {
+    let updatedPage = appContext.postCurrentPage + 1;
+
+    appContext.setPostCurrentPage(updatedPage);
+  }
 
   return (
     <div className="page page--cott">
@@ -24,7 +31,13 @@ const Cott = ({intro, categories}) => {
         <div className="page__copy">
 
           <div className="page__section">
-            <h2>Cott Posts</h2>
+
+            <div className="home-intro-top">
+              <div>
+                <button onClick={() => updateCurrentPostPage()}>Set post page</button>
+                <span> = {appContext.postCurrentPage}</span>
+              </div>
+            </div>
 
             <div className="home-intro">
               <div className="grid">
