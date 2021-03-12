@@ -40,9 +40,9 @@ const CottPage = ({data, currentPage}) => {
 
             <div className="post-listing">
               <ul className="grid">
-                {posts && posts.map((post, index) => {
+                {posts && posts.map((post) => {
                   return (
-                    <li className="post-listing__item" key={index}>
+                    <li className="post-listing__item" key={post.id}>
                       <Link href={`../post/${post.slug}`}>
                         <a>
                           <div className="post-listing__img">
